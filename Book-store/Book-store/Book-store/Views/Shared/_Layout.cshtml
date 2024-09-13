@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Book_store</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        /* Set the entire navbar background to orange */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-cudno {
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .navbar-brand-cudno {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+            .navbar-brand-cudno img {
+                height: 50px;
+                width: 130px;
+                margin-right: 10px;
+            }
+
+        .search-bar-cudno {
+            width: 500px;
+            justify-content: center;
+            border-radius: 40px;
+        }
+
+            .search-bar-cudno:focus {
+                border-color: #ff9800; /* Optional: Change the border color when focused */
+                box-shadow: 0 0 5px rgba(255, 152, 0, 0.5); /* Optional: Add a glow effect when focused */
+            }
+
+        .search-input-cudno:focus {
+            border-color: #ff9800; /* Optional: Change the border color when focused */
+            box-shadow: 0 0 5px rgba(255, 152, 0, 0.5); /* Optional: Add a glow effect when focused */
+        }
+
+        .search-input-cudno {
+            flex-grow: 1;
+            width: 500px;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .icon-links-cudno {
+            display: flex;
+            align-items: center;
+            margin-left: auto; /* Pushes the login partial to the right */
+        }
+
+            .icon-links-cudno a {
+                color: black !important;
+                margin-left: 15px;
+            }
+
+        .navbar {
+            background-color: #ff9800 !important; /* Orange color */
+            height: 80px;
+        }
+
+        /* Change the font color and style for the links and brand */
+        .navbar-nav .nav-link,
+        .navbar-brand {
+            font-family: serif;
+            font-size: 22px;
+            color: black !important;
+            margin-left: 30px;
+        }
+
+            /* Change the color of the links on hover */
+            .navbar-nav .nav-link:hover {
+                color: #182F41 !important; /* Lighter shade of orange */
+            }
+
+        .icon-links-cudno .dropdown-menu {
+            min-width: 150px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white; /* Dropdown background */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Optional: Add a shadow */
+        }
+
+        /* Style the dropdown items */
+        .icon-links-cudno .dropdown-item {
+            color: #333;
+            padding: 8px 12px;
+        }
+
+            .icon-links-cudno .dropdown-item:hover {
+                background-color: #FF9800; /* Optional: Change background on hover */
+                color: white;
+            }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            color: black;
+            text-transform: uppercase;
+            padding: 10px 20px;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: black !important; /* Change text color on hover */
+            }
+
+            .navbar-nav .nav-link::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 0;
+                height: 2px;
+                background-color: #FF9800; /* Line color */
+                transition: width 0.3s ease-in-out;
+            }
+
+            .navbar-nav .nav-link:hover::after {
+                width: 100%; /* Expand the underline on hover */
+            }
+
+        /* Optional: Add some padding to the footer */
+        .footer {
+            padding: 1rem 0;
+            background-color: #ff9800;
+            color: #BF5927 — #F39A1F;
+            text-align: center;
+        }
+
+        footer {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa; /* Optional: Change to your desired background color */
+            text-align: center;
+            padding: 1rem 0;
+            z-index: 1000;
+            border-top: 1px solid #eaeaea; /* Optional: For a subtle border */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar-cudno navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand-cudno" href="#">
+                <img src="https://t4.ftcdn.net/jpg/02/11/07/81/360_F_211078110_mttxEdu3gsSbMKajsy98E4M4E5RUCiuo.jpg" alt="Logo">
+            </a>
+            <div class="search-bar-cudno">
+                <input type="text" class="form-control search-input-cudno" placeholder="Search over 30 million books">
+            </div>
+            <div class="icon-links-cudno">
+                <a asp-controller="ShoppingCarts" asp-action="Index" class="activ">
+                    <svg xmlns="http://www.w3.org/2000/svg" margin="20px" width="25" height="25" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
+                    </svg>
+                </a>
+                <a href="#" class="activ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                    </svg>
+                </a>
+                <div class="login-partial">
+                    <partial style="color:black !important" name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <nav class="navbar navbar-expand-lg navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid justify-content-center">
+                <!-- Navbar Links in the Center -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <!-- Books Link with Hover Underline -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Book" asp-action="Index">Books</a>
+                        </li>
+                        <!-- Publishers Link with Hover Underline -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Publisher" asp-action="Index">Publishers</a>
+                        </li>
+                        <!-- Authors Link with Hover Underline -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Author" asp-action="Index">Authors</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Book_store - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@using Book_store.Domain
+﻿@using Book_store.Domain.Models
+﻿@using Microsoft.Extensions.Options
+@model Book_store.Domain.DTO.ShoppingCartDto
+@inject IOptions<StripeSettings> Stripe
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (Model.TotalPrice != 0)
+{
+    <form asp-controller="ShoppingCarts" asp-action="PayOrder" method="post">
+        <article>
+            <script src="https://checkout.stripe.com/checkout.js"
+                    class="stripe-button"
+                    data-key="pk_test_51PlHjsP8t3sfphX81ZpDJYskHfhw1jyvsi8V0xDJKYeJmkkumuAVTmNEMubK2YIrOb74AkrltVe5dL2xDkdAIUQo00kcJCh9Eg"
+                    data-locale="auto"
+                    data-description="EShop Application Payment"
+                    data-amount="@(Model.TotalPrice * 100)"
+                    data-label="Pay @Model.TotalPrice Ден.">
+            </script>
+            <script src="https://js.stripe.com/v3/"></script>
+        </article>
+    </form>
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Book_store</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Product name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Books.Count(); i++)
+        {
+            var item = Model.Books[i];
+            <tr>
+                <td>@(i + 1)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    |
+                    <a asp-action="DeleteFromShoppingCart" asp-controller="ShoppingCarts" asp-route-id="@item.Book.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    <th><b>Total:</b></th>
+
+    <th></th>
+    <th></th>
+    <th></th>
+
+    <th><b>@Model.TotalPrice</b></th>
+
+    </tfoot>
+</table>
+</body>
+</html>
